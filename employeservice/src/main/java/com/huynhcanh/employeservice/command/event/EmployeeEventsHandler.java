@@ -37,6 +37,5 @@ public class EmployeeEventsHandler {
         } catch (Exception e) {
             System.out.print(e.getMessage());
         }
-
     }
 }

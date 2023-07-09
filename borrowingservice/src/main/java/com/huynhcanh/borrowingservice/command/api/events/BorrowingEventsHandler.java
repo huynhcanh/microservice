@@ -2,6 +2,8 @@ package com.huynhcanh.borrowingservice.command.api.events;
 
 import com.huynhcanh.borrowingservice.command.api.data.BorrowRepository;
 import com.huynhcanh.borrowingservice.command.api.data.Borrowing;
+import com.huynhcanh.borrowingservice.command.api.model.Message;
+import com.huynhcanh.borrowingservice.command.api.service.BorrowService;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ public class BorrowingEventsHandler {
 
     @Autowired
     private BorrowRepository borrowRepository;
+
+    @Autowired
+    private BorrowService borrowService;
 
     @EventHandler
     public void on(BorrowCreatedEvent event) {
@@ -26,5 +31,11 @@ public class BorrowingEventsHandler {
             borrowRepository.deleteById(event.getId());
         }
         else return;
+    }
+
+    @EventHandler
+    public void on(BorrowSendMessageEvent event) {
+        Message message = new Message(event.getEmployeeId(), event.getMessage());
+        borrowService.sendMessage(message);
     }
 }

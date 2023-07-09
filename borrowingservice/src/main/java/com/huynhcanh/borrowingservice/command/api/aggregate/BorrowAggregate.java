@@ -2,8 +2,10 @@ package com.huynhcanh.borrowingservice.command.api.aggregate;
 
 import com.huynhcanh.borrowingservice.command.api.command.CreateBorrowCommand;
 import com.huynhcanh.borrowingservice.command.api.command.DeleteBorrowCommand;
+import com.huynhcanh.borrowingservice.command.api.command.SendMessageCommand;
 import com.huynhcanh.borrowingservice.command.api.events.BorrowCreatedEvent;
 import com.huynhcanh.borrowingservice.command.api.events.BorrowDeletedEvent;
+import com.huynhcanh.borrowingservice.command.api.events.BorrowSendMessageEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -50,5 +52,19 @@ public class BorrowAggregate {
     @EventSourcingHandler
     public void on(BorrowDeletedEvent event) {
         this.id = event.getId();
+    }
+
+    @CommandHandler
+    public void handle(SendMessageCommand command) {
+        BorrowSendMessageEvent event = new BorrowSendMessageEvent();
+        BeanUtils.copyProperties(command, event);
+        AggregateLifecycle.apply(event);
+    }
+
+    @EventSourcingHandler
+    public void on(BorrowSendMessageEvent event) {
+        this.id = event.getId();
+        this.message = event.getMessage();
+        this.employeeId = event.getEmployeeId();
     }
 }
