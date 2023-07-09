@@ -4,9 +4,12 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/apigateway/apigateway.iml" filepath="$PROJECT_DIR$/apigateway/apigateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/bookservice/bookservice.iml" filepath="$PROJECT_DIR$/bookservice/bookservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/borrowingservice/borrowingservice.iml" filepath="$PROJECT_DIR$/borrowingservice/borrowingservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonservice/commonservice.iml" filepath="$PROJECT_DIR$/commonservice/commonservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/discoveryserver/discoveryserver.iml" filepath="$PROJECT_DIR$/discoveryserver/discoveryserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/employeservice/employeservice.iml" filepath="$PROJECT_DIR$/employeservice/employeservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/microservice.iml" filepath="$PROJECT_DIR$/.idea/microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notificationservice/notificationservice.iml" filepath="$PROJECT_DIR$/notificationservice/notificationservice.iml" />
     </modules>
   </component>
 </project>
