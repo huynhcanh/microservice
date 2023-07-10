@@ -10,6 +10,7 @@
         <module name="apigateway" />
         <module name="commonservice" />
         <module name="employeservice" />
+        <module name="userservice" />
         <module name="borrowingservice" />
         <module name="discoveryserver" />
         <module name="bookservice" />
@@ -24,6 +25,7 @@
       <module name="discoveryserver" target="17" />
       <module name="employeservice" target="17" />
       <module name="notificationservice" target="17" />
+      <module name="userservice" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -35,6 +37,7 @@
       <module name="discoveryserver" options="-parameters" />
       <module name="employeservice" options="-parameters" />
       <module name="notificationservice" options="-parameters" />
+      <module name="userservice" options="-parameters" />
     </option>
   </component>
 </project>
