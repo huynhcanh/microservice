@@ -4,6 +4,7 @@ import com.huynhcanh.borrowingservice.command.api.command.DeleteBorrowCommand;
 import com.huynhcanh.borrowingservice.command.api.command.SendMessageCommand;
 import com.huynhcanh.borrowingservice.command.api.events.BorrowCreatedEvent;
 import com.huynhcanh.borrowingservice.command.api.events.BorrowDeletedEvent;
+import com.huynhcanh.borrowingservice.command.api.events.BorrowingUpdateBookReturnEvent;
 import com.huynhcanh.commonservice.command.RollBackStatusBookCommand;
 import com.huynhcanh.commonservice.command.UpdateStatusBookCommand;
 import com.huynhcanh.commonservice.event.BookRollBackStatusEvent;
@@ -99,5 +100,20 @@ public class BorrowingSaga {
     public void handle(BorrowDeletedEvent event) {
         System.out.println("BorrowDeletedEvent in Saga for Borrowing Id : {} " + event.getId());
         SagaLifecycle.end();
+    }
+
+    @StartSaga
+    @SagaEventHandler(associationProperty = "id")
+    private void handle(BorrowingUpdateBookReturnEvent event) {
+        System.out.println("BorrowingUpdateBookReturnEvent in Saga for borrowing Id : "+event.getId());
+        try {
+            UpdateStatusBookCommand command = new UpdateStatusBookCommand(event.getBookId(), true,event.getEmployee(),event.getId());
+            commandGateway.sendAndWait(command);
+            commandGateway.sendAndWait(new SendMessageCommand(event.getId(), event.getEmployee(), "Da tra sach thanh cong !"));
+            SagaLifecycle.end();
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.out.println(e.getMessage());
+        }
     }
 }
