@@ -19,10 +19,12 @@ public class UserController {
     public List<User> getAllUser() {
         return userService.getAllUser();
     }
+
     @PostMapping("/addUser")
     public UserDTO addUser(@RequestBody UserDTO dto) {
         return userService.saveUser(dto);
     }
+
     @PostMapping("/login")
     public UserDTO login(@RequestBody UserDTO dto) {
         return userService.login(dto.getUsername(), dto.getPassword());
